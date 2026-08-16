@@ -8,12 +8,33 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-# app.secret_key = "secure-secret-key"
 app.secret_key = os.environ.get("SECRET_KEY", "fallback-dev-key")
+
 def get_db():
     conn = sqlite3.connect("database.db")
     conn.row_factory = sqlite3.Row
     return conn
+
+def init_db():
+    db = get_db()
+    db.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY,
+            username TEXT UNIQUE,
+            password TEXT,
+            role TEXT DEFAULT 'user'
+        )
+    ''')
+    db.execute('''
+        CREATE TABLE IF NOT EXISTS students (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            email TEXT,
+            course TEXT
+        )
+    ''')
+    db.commit()
+    db.close()
 
 # ---------- ROLE-BASED ACCESS DECORATOR ----------
 
@@ -176,6 +197,10 @@ def api_delete_student(id):
     db.execute("DELETE FROM students WHERE id=?", (id,))
     db.commit()
     return jsonify({"message": "Student deleted"})
+
+# ---------- INITIALIZE DATABASE ----------
+
+init_db()
 
 if __name__ == '__main__':
     app.run(debug=False)
