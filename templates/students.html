@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>Students</h2>
+<a href="/add-student">Add Student</a>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Course</th>
+        <th>Actions</th>
+    </tr>
+    {% for s in students %}
+    <tr>
+        <td>{{ s['name'] }}</td>
+        <td>{{ s['email'] }}</td>
+        <td>{{ s['course'] }}</td>
+        <td>
+            <a href="/edit/{{ s['id'] }}">Edit</a>
+            {% if role == 'admin' %}
+                <a href="/admin/delete/{{ s['id'] }}">Delete</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

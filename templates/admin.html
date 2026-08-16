@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Admin Panel — All Users</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Role</th>
+        </tr>
+        {% for u in users %}
+        <tr>
+            <td>{{ u['id'] }}</td>
+            <td>{{ u['username'] }}</td>
+            <td>{{ u['role'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

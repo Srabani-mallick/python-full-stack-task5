@@ -1,0 +1,50 @@
+body {
+    font-family: Arial;
+    background: #f4f6f8;
+    padding: 40px;
+}
+
+h2 {
+    color: #1e293b;
+}
+
+form {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+form input, button {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+button {
+    background: #1e40af;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+table {
+    width: 70%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+th {
+    background: #1e40af;
+    color: white;
+}
+
+a {
+    color: #1e40af;
+    margin-right: 10px;
+}
