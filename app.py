@@ -64,6 +64,15 @@ def register():
 
     return render_template('register.html')
 
+# ---------- TEMPORARY ADMIN PROMOTION ROUTE (remove after use) ----------
+
+@app.route('/make-admin/<username>')
+def make_admin(username):
+    db = get_db()
+    db.execute("UPDATE users SET role = 'admin' WHERE username = ?", (username,))
+    db.commit()
+    return f"{username} is now admin!"
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
